@@ -179,11 +179,38 @@ def prepare_cleaned_features(X, iqr_k=1.5):
 
     return clip_columns(X, lower, upper)
 
-# Step 20 - assemble_feature_matrix (not yet solved)
-# TODO: implement
+# Step 20 - assemble_feature_matrix
+def assemble_feature_matrix(X_num, ratio_num_idx, ratio_den_idx, cat_labels=None):
+    numerator = X_num[:, ratio_num_idx]
+    denominator = X_num[:, ratio_den_idx]
+    new_ratio_feature = make_ratio_feature(numerator, denominator)
+    X_num = append_column(X_num, new_ratio_feature)
 
-# Step 21 - make_train_val_test (not yet solved)
-# TODO: implement
+    if cat_labels is not None:
+        one_hot_cols = one_hot_encode(cat_labels)
+        X_num = np.hstack([X_num, one_hot_cols])
+
+    return X_num
+
+# Step 21 - make_train_val_test
+def make_train_val_test(X, y, train_ratio, val_ratio, seed):
+    n_samples, n_features = X.shape
+
+    indices = make_shuffled_indices(n_samples, seed)
+    train_idx, val_idx, test_idx = partition_indices(indices, train_ratio, val_ratio)
+
+    X_train, y_train = subset_xy(X, y, train_idx)
+    X_val, y_val = subset_xy(X, y, val_idx)
+    X_test, y_test = subset_xy(X, y, test_idx)
+
+    return {
+        'X_train' : X_train,
+        'y_train' : y_train,
+        'X_val' : X_val,
+        'y_val' : y_val,
+        'X_test' : X_test,
+        'y_test' : y_test
+    }
 
 # Step 22 - standardize_and_add_bias (not yet solved)
 # TODO: implement
