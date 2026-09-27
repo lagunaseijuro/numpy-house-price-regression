@@ -105,8 +105,11 @@ def add_bias_column(X):
 
     return np.hstack([np.ones(shape=(N, 1)), X])
 
-# Step 10 - make_shuffled_indices (not yet solved)
-# TODO: implement
+# Step 10 - make_shuffled_indices
+def make_shuffled_indices(n_samples, seed):
+    np.random.seed(seed)
+
+    return np.random.permutation(n_samples)
 
 # Step 11 - partition_indices (not yet solved)
 # TODO: implement
