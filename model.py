@@ -171,8 +171,13 @@ def residual_summary(y_true, y_pred):
         'median_abs' : float(np.median(np.abs(residials)))
     }
 
-# Step 19 - prepare_cleaned_features (not yet solved)
-# TODO: implement
+# Step 19 - prepare_cleaned_features
+def prepare_cleaned_features(X, iqr_k=1.5):
+    impute_nan_with_mean(X)
+
+    lower, upper = compute_iqr_bounds(X, iqr_k)
+
+    return clip_columns(X, lower, upper)
 
 # Step 20 - assemble_feature_matrix (not yet solved)
 # TODO: implement
