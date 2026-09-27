@@ -145,8 +145,9 @@ def mean_absolute_error(y_true, y_pred):
     # TODO: return the mean absolute error between targets and predictions
     return np.mean(np.abs(y_true - y_pred))
 
-# Step 16 - root_mean_squared_error (not yet solved)
-# TODO: implement
+# Step 16 - root_mean_squared_error
+def root_mean_squared_error(y_true, y_pred):
+    return np.sqrt(np.mean((y_true - y_pred) ** 2))
 
 # Step 17 - r_squared (not yet solved)
 # TODO: implement
