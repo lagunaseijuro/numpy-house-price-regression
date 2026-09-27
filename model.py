@@ -9,7 +9,7 @@ import numpy as np
 # Step 1 - impute_nan_with_mean
 import numpy as np
 
-def impute_nan_with_mean(X):
+def impute_nan_with_mean(X, flag=False, col_means=None):
     """Replace every NaN in X with that column's nan-aware mean (all-NaN cols -> 0).
 
     Args:
@@ -19,8 +19,10 @@ def impute_nan_with_mean(X):
         (N, F) float ndarray with no NaNs.
     """
     # TODO: Replace every NaN with that column's nan-aware mean...
-    col_means = np.nanmean(X, axis=0, keepdims=True)
-    col_means = np.where(np.isnan(col_means), 0.0, col_means)
+
+    if not flag:
+        col_means = np.nanmean(X, axis=0, keepdims=True)
+        col_means = np.where(np.isnan(col_means), 0.0, col_means)
 
     np.putmask(X, np.isnan(X), col_means)
 
