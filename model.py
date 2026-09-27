@@ -41,8 +41,20 @@ def compute_iqr_bounds(X, k=1.5):
 
     return (lower, upper)
 
-# Step 3 - clip_columns (not yet solved)
-# TODO: implement
+# Step 3 - clip_columns
+import copy
+import numpy as np
+
+def clip_columns(X, lower, upper):
+    X_output = copy.copy(X)
+
+    lower_mask = (X < lower)
+    upper_mask = (X > upper)
+
+    np.putmask(X_output, lower_mask, lower)
+    np.putmask(X_output, upper_mask, upper)
+    
+    return X_output
 
 # Step 4 - make_ratio_feature (not yet solved)
 # TODO: implement
