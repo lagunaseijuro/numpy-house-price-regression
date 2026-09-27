@@ -70,11 +70,30 @@ def append_column(X, col):
 
     return X_output
 
-# Step 6 - one_hot_encode (not yet solved)
-# TODO: implement
+# Step 6 - one_hot_encode
+def one_hot_encode(labels):
+    # TODO: Convert a 1-D array of categorical labels into a dense binary one-hot matrix.
+    unique_cat = np.unique(labels)
+    N = len(labels)
+    C = len(unique_cat)
+    
+    indices = np.searchsorted(unique_cat, labels)
+    
+    result = np.zeros(shape=(N, C), dtype=float)
+    
+    result[np.arange(N), indices] = 1.0
+    
+    return result
 
-# Step 7 - fit_standardizer (not yet solved)
-# TODO: implement
+# Step 7 - fit_standardizer
+def fit_standardizer(X):
+    # TODO: Compute per-column mean and std used to standardize features...
+    X_mean = np.mean(X, axis=0)
+    X_std = np.std(X, axis=0)
+    
+    X_std = np.where(X_std == 0, 1.0, X_std)
+    
+    return (X_mean, X_std)
 
 # Step 8 - apply_standardizer (not yet solved)
 # TODO: implement
